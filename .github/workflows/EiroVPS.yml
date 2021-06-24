@@ -1,0 +1,58 @@
+name: EiroVPS
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Sabar Ngntd Lagi Mendownload Ngrok.
+      run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip && unzip ngrok.zip && chmod +x ngrok && sudo apt install binfmt-support qemu qemu-user-static -y
+    - name: Connect Ke Akun Ngrok.
+      run: ./ngrok authtoken $NGROK_AUTH_TOKEN
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    - name: Sabar Asu Lagi Menghidupkan Access User Root.
+      run: sudo useradd -m EiroVPS &> /dev/null && sudo adduser EiroVPS sudo &> /dev/null && echo 'EiroVPS:@EiroVPS2021' | sudo chpasswd && sudo sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd && sudo usermod -aG sudo EiroVPS && sudo hostname EiroVPS
+    - name: Membuat Tunnel.
+      run: ./ngrok tcp 22 > /dev/null &
+    - name: MAMPUS ERROR WKWOWKWKWKW.
+      run: | 
+        echo Berhasil Menginstall!, Jika VPSnya Mati Silahkan Rebuild Lagi!
+        echo Ip:
+        curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url | cut -d / -f3 | cut -d : -f1 || echo "Tidak bisa mendapatkan Ip, pastikan NGROK_AUTH_TOKEN benar di Settings> Secrets> Repository secret. Mungkin VM Anda sebelumnya masih berjalan: https://dashboard.ngrok.com/status/tunnels "
+        echo Port:
+        curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url | cut -d / -f3 | cut -d : -f2 || echo "Tidak bisa mendapatkan Port, pastikan NGROK_AUTH_TOKEN benar di Settings> Secrets> Repository secret. Mungkin VM Anda sebelumnya masih berjalan: https://dashboard.ngrok.com/status/tunnels "
+        echo Username: EiroVPS
+        echo Password: @EiroVPS2021
+        echo Sudo Password: @EiroVPS2021
+        echo Silahkan Login Ke VPS Anda!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo JANGAN DI PAKEK TERUS KONTOL!!
+        echo canda.
+        ping -n 10 127.0.0.1 > /dev/null &
+    - name: Dah Jadi Kontol Sono Pakek Vps Nya Ngntd.
+      run: | 
+        wget https://raw.githubusercontent.com/ItzApipAjalah/EiroVPS/main/loop.sh
+        chmod +x loop.sh
+        ./loop.sh
